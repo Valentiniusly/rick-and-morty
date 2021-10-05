@@ -1,9 +1,13 @@
 <template>
-  <h1>Home</h1>
+  <CharsContainer />
 </template>
 
 <script>
+import { ref, onMounted } from 'vue';
+import { useStore } from 'vuex';
+import CharsContainer from '../components/CharsContainer';
 export default {
+  components: { CharsContainer },
   setup() {
     return {};
   },

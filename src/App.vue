@@ -1,19 +1,20 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link>
-    <router-link to="/character/1">Character</router-link>
-    <router-link to="/episode/1">Episode</router-link>
+  <div class="container">
+    <div id="nav">
+      <router-link to="/">Home</router-link>
+      <router-link to="/character/1">Character</router-link>
+      <router-link to="/episode/1">Episode</router-link>
+    </div>
+    <router-view />
   </div>
-  <router-view />
 </template>
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
 }
 
 #nav {
@@ -21,9 +22,8 @@
 
   a {
     font-weight: bold;
-    color: #2c3e50;
 
-    &.router-link-exact-active {
+    &.active {
       color: #42b983;
     }
   }
