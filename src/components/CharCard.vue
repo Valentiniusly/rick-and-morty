@@ -11,8 +11,8 @@
         <p class="species"><b>Species:</b>&nbsp;{{ char.species }}</p>
         <p class="episodes"><b>Episodes:</b>
           <ul>
-            <li v-for='e in char.episode' :key='e'>
-              <router-link to>{{e}}</router-link>
+            <li v-for='e in char.episode?.slice(0, 5)' :key='e'>
+              <router-link :to='e'>{{cutLink(e)}}</router-link>
             </li>
           </ul>
         <!--eslint-disable-next-line prettier/prettier-->
@@ -27,9 +27,14 @@ import {computed} from 'vue';
 export default {
   props: ['char'],
   setup(props) {
+    const cutLink = (link) => {
+      const split = link.split('/');;
+      return split[split.length - 1];
+    }
 
     return {
-      joinName: computed(() => props.char.name.split(' ').join(''))
+      joinName: computed(() => props.char.name?.split(' ').join('')),
+      cutLink
     }
   },
 };
@@ -42,7 +47,7 @@ export default {
   overflow: hidden;
 
   header {
-    height: 50px;
+    height: 80px;
     background: #97ce4c;
     display: flex;
     justify-content: center;
@@ -80,6 +85,7 @@ export default {
       justify-content: flex-start;
       align-items: flex-start;
       .episodes {
+        text-align: left;
         b {
           vertical-align: top;
         }
