@@ -13,6 +13,7 @@
 
 <script>
 import { ref, watch, computed } from 'vue';
+import { useStore } from 'vuex';
 import Button from '../components/Button';
 
 export default {
@@ -21,14 +22,18 @@ export default {
   components: { Button },
 
   setup(_, { emit }) {
-    const name = ref('');
-    const status = ref('');
+    const store = useStore();
+    const filter = store.getters['character/filter'];
+    const name = ref(filter.name);
+    const status = ref(filter.status || '');
 
     watch([name, status], (values) => {
-      emit('update:modelValue', {
+      const filter = {
         name: values[0],
         status: values[1],
-      });
+      };
+      emit('update:modelValue', filter);
+      store.commit('character/setFilter', filter);
     });
 
     const isActive = computed(() => name.value || status.value);

@@ -12,12 +12,13 @@ import CharsContainer from '../components/CharsContainer';
 import Loader from '../components/Loader';
 import Button from '../components/Button';
 import CharsFilter from '../components/CharsFilter';
+
 export default {
   components: { CharsContainer, Loader, Button, CharsFilter },
   setup() {
     const store = useStore();
     const loading = computed(() => store.getters['loading']);
-    const filter = ref({});
+    const filter = ref(store.getters['character/filter']);
 
     onMounted(async () => {
       const isNotYetLoaded = !store.getters['character/characters'].length;

@@ -9,6 +9,7 @@ export default {
       next: null,
       prev: null,
     },
+    filter: {},
   }),
   mutations: {
     setCharacters(state, characters) {
@@ -23,6 +24,9 @@ export default {
     },
     setCharacter(state, character) {
       state.character = character;
+    },
+    setFilter(state, filter) {
+      state.filter = filter;
     },
   },
   actions: {
@@ -84,6 +88,9 @@ export default {
     },
     character(state) {
       return state.character;
+    },
+    filter(state) {
+      return state.filter;
     },
   },
 };
