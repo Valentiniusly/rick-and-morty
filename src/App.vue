@@ -2,8 +2,6 @@
   <div class="container">
     <div id="nav">
       <router-link to="/">Home</router-link>
-      <router-link to="/character/1">Character</router-link>
-      <router-link to="/episode/1">Episode</router-link>
     </div>
     <router-view />
   </div>

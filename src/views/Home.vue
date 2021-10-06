@@ -20,8 +20,9 @@ export default {
     const filter = ref({});
 
     onMounted(async () => {
-      if (!store.getters['characters'].length) {
-        await store.dispatch('loadCharacters');
+      const isNotYetLoaded = !store.getters['character/characters'].length;
+      if (isNotYetLoaded) {
+        await store.dispatch('character/loadCharacters');
       }
     });
     onUnmounted(() => {
@@ -29,11 +30,11 @@ export default {
     });
 
     const addCharacters = async () => {
-      await store.dispatch('loadMoreCharacters');
+      await store.dispatch('character/loadMoreCharacters');
     };
 
     const characters = computed(() =>
-      store.getters['characters']
+      store.getters['character/characters']
         .filter((char) => {
           if (filter.value.name) {
             return char.name.toLowerCase().includes(filter.value.name);
@@ -45,6 +46,7 @@ export default {
             return char.status.toLowerCase() === filter.value.status;
           }
           return char;
+          // eslint-disable-next-line prettier/prettier
         })
     );
 

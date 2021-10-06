@@ -3,13 +3,13 @@ import Home from '../views/Home';
 
 const routes = [
   {
-    path: '/character/:id/:name',
+    path: '/character/:name/:id',
     name: 'Character',
     component: () => import('../views/Character'),
   },
   {
-    path: '/episode/:name',
-    name: 'Home',
+    path: '/episode/:id',
+    name: 'Episode',
     component: () => import('../views/Episode'),
   },
   {

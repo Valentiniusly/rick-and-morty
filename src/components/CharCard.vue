@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="CharCard">
     <header>
       <h2
         v-if="single"
@@ -23,12 +23,12 @@
         <p v-if="!single" class="episodes"><b>Episodes:</b>
           <ul>
             <li v-for='e in char.episode?.slice(0, 5)' :key='e'>
-              <router-link :to='e'>{{cutLink(e)}}</router-link>
+              <router-link :to="{name: 'Episode', params: {id: episodeId(e)}}">{{episodeId(e)}}</router-link>
             </li>
           </ul>
         <!--eslint-disable-next-line prettier/prettier-->
         </p>
-        <p v-else><b>Location</b>&nbsp;{{ char.location?.name }}</p>
+        <p v-else><b>Location:</b>&nbsp;{{ char.location?.name }}</p>
       </div>
     </div>
   </div>
@@ -37,31 +37,31 @@
 <script>
 import {computed} from 'vue';
 export default {
-  props: ['char', 'single'],
+  props: {char: Object, single: Boolean},
   setup(props) {
     const joinName = computed(() => props.char.name?.split(' ').join(''));
-    const cutLink = (link) => {
+    const episodeId = (link) => {
       const split = link.split('/');;
       return split[split.length - 1];
     }
 
     return {
       joinName,
-      cutLink
+      episodeId
     }
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.card {
+.CharCard {
   border-radius: 20px;
   background: #fff;
   overflow: hidden;
 
   header {
     height: 80px;
-    background: #97ce4c;
+    background: #4d9142;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,10 +69,10 @@ export default {
     h2 {
       font-size: 35px;
       line-height: 1;
-      color: #69c8ec;
+      color: #44c3d8;
       cursor: pointer;
-      text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff,
-        1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+      text-shadow: 1px 0 3px #fff, -1px 0 3px #fff, 0 1px 3px #fff, 0 -1px 3px #fff,
+        1px 1px 3px #fff, -1px -1px 3px #fff, 1px -1px 3px #fff, -1px 1px 3px #fff;
     }
   }
 

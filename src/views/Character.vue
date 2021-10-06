@@ -1,10 +1,10 @@
 <template>
   <Loader v-if="loading" />
-  <CharCard :char="character" single="true" />
+  <CharCard v-else :char="character" single />
 </template>
 
 <script>
-import { onMounted, computed } from 'vue';
+import { onMounted, onUnmounted, computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 import CharCard from '../components/CharCard';
@@ -17,10 +17,13 @@ export default {
     const loading = computed(() => store.getters['loading']);
 
     onMounted(async () => {
-      await store.dispatch('loadCharacter', route.params.id);
+      await store.dispatch('character/loadCharacter', route.params.id);
+    });
+    onUnmounted(() => {
+      store.commit('character/setCharacter', {});
     });
 
-    const character = computed(() => store.getters['character']);
+    const character = computed(() => store.getters['character/character']);
 
     return {
       character,
