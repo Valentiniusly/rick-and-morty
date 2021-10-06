@@ -1,7 +1,18 @@
 <template>
   <div class="card">
     <header>
-      <router-link :to="'/character/' + joinName" v-slot='{navigate}'>
+      <h2
+        v-if="single"
+        style="cursor: default"
+      >
+        {{char.name}}
+      </h2>
+      <router-link
+        v-else
+        custom
+        :to="{name: 'Character', params: {name: joinName, id: char.id}}"
+        v-slot='{navigate}'
+      >
         <h2 @click='navigate'>{{char.name}}</h2>
       </router-link>
     </header>
@@ -9,7 +20,7 @@
       <img :src="char.image" :alt="char.name" />
       <div class="info">
         <p class="species"><b>Species:</b>&nbsp;{{ char.species }}</p>
-        <p class="episodes"><b>Episodes:</b>
+        <p v-if="!single" class="episodes"><b>Episodes:</b>
           <ul>
             <li v-for='e in char.episode?.slice(0, 5)' :key='e'>
               <router-link :to='e'>{{cutLink(e)}}</router-link>
@@ -17,6 +28,7 @@
           </ul>
         <!--eslint-disable-next-line prettier/prettier-->
         </p>
+        <p v-else><b>Location</b>&nbsp;{{ char.location?.name }}</p>
       </div>
     </div>
   </div>
@@ -25,15 +37,16 @@
 <script>
 import {computed} from 'vue';
 export default {
-  props: ['char'],
+  props: ['char', 'single'],
   setup(props) {
+    const joinName = computed(() => props.char.name?.split(' ').join(''));
     const cutLink = (link) => {
       const split = link.split('/');;
       return split[split.length - 1];
     }
 
     return {
-      joinName: computed(() => props.char.name?.split(' ').join('')),
+      joinName,
       cutLink
     }
   },
@@ -53,16 +66,13 @@ export default {
     justify-content: center;
     align-items: center;
 
-    a {
-      text-decoration: none;
-      h2 {
-        font-size: 35px;
-        line-height: 1;
-        color: #69c8ec;
-        cursor: pointer;
-        text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff,
-          1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
-      }
+    h2 {
+      font-size: 35px;
+      line-height: 1;
+      color: #69c8ec;
+      cursor: pointer;
+      text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff,
+        1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
     }
   }
 

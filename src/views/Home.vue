@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { useStore } from 'vuex';
 import CharsContainer from '../components/CharsContainer';
 import Loader from '../components/Loader';
@@ -16,21 +16,20 @@ export default {
   components: { CharsContainer, Loader, Button, CharsFilter },
   setup() {
     const store = useStore();
-    const loading = ref(false);
+    const loading = computed(() => store.getters['loading']);
     const filter = ref({});
 
     onMounted(async () => {
       if (!store.getters['characters'].length) {
-        loading.value = true;
         await store.dispatch('loadCharacters');
-        loading.value = false;
       }
+    });
+    onUnmounted(() => {
+      store.commit('setLoading', false);
     });
 
     const addCharacters = async () => {
-      loading.value = true;
       await store.dispatch('loadMoreCharacters');
-      loading.value = false;
     };
 
     const characters = computed(() =>

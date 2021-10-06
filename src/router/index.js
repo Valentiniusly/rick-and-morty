@@ -3,7 +3,7 @@ import Home from '../views/Home';
 
 const routes = [
   {
-    path: '/character/:name',
+    path: '/character/:id/:name',
     name: 'Character',
     component: () => import('../views/Character'),
   },

@@ -13,6 +13,8 @@ export default {
 
 <style lang="scss" scoped>
 button {
+  display: block;
+  margin: 0 auto;
   background-color: chartreuse;
 }
 </style>

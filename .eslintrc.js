@@ -15,6 +15,7 @@ module.exports = {
         trailingComma: 'all',
       },
     ],
+    'vue/no-unused-components': 1,
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
   },
