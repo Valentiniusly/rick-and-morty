@@ -42,7 +42,6 @@ export default createStore({
     async loadMoreCharacters({ state, commit }) {
       try {
         const data = await axios.get(state.pages.next);
-        console.log(data.data.results);
         commit('setPages', {
           next: data.data.info.next,
           prev: data.data.info.prev,

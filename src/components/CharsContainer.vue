@@ -1,6 +1,6 @@
 <template>
   <div class="chars-container">
-    <CharCard v-for="char in characters" :key="char.name" :char="char" />
+    <CharCard v-for="char in characters" :key="char.id" :char="char" />
   </div>
 </template>
 
