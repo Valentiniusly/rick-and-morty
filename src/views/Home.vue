@@ -1,6 +1,7 @@
 <template>
   <CharsFilter v-model="filter" />
   <CharsContainer :characters="characters || []" />
+  <h2 v-if="!characters.length">Try load more</h2>
   <Loader v-if="loading" />
   <Button @click="addCharacters" :disabled="loading">Load more</Button>
 </template>
@@ -60,4 +61,10 @@ export default {
   },
 };
 </script>
-<style lang="scss"></style>
+<style lang="scss">
+h2 {
+  color: white;
+  text-align: center;
+  margin: 0 auto;
+}
+</style>

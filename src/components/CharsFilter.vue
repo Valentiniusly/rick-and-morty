@@ -1,12 +1,14 @@
 <template>
   <div class="filter">
-    <input v-model="name" type="text" />
-    <select v-model="status" :selected="status">
-      <option value="" disabled>Status</option>
-      <option value="alive">Alive</option>
-      <option value="dead">Dead</option>
-      <option value="unknown">Unknown</option>
-    </select>
+    <div class="inputs">
+      <input v-model="name" type="text" />
+      <select v-model="status" :selected="status">
+        <option value="" disabled>Status</option>
+        <option value="alive">Alive</option>
+        <option value="dead">Dead</option>
+        <option value="unknown">Unknown</option>
+      </select>
+    </div>
     <Button v-if="isActive" @click="clear">Clear</Button>
   </div>
 </template>
@@ -51,4 +53,33 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.filter {
+  margin: 20px 0;
+  .inputs {
+    display: flex;
+    justify-content: center;
+    input {
+      font-size: 20px;
+      padding: 0.2em 0.4em;
+      border: none;
+      outline: none;
+      border-radius: 5px;
+      margin: 0 8px;
+      width: 100%;
+      max-width: 300px;
+      &:focus {
+        outline: 3px solid #4d9142;
+      }
+    }
+    select {
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      width: 80px;
+    }
+  }
+}
+</style>

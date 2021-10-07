@@ -1,5 +1,5 @@
 <template>
-  <div class="CharCard">
+  <div class="charCard">
     <header>
       <h2
         v-if="single"
@@ -54,7 +54,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.CharCard {
+.charCard {
   border-radius: 20px;
   background: #fff;
   overflow: hidden;
@@ -88,7 +88,10 @@ export default {
     .info {
       margin-left: 10px;
       p {
-        margin: 5px;
+        margin: 2px;
+      }
+      b {
+        font-size: 18px;
       }
       display: flex;
       flex-direction: column;
@@ -96,16 +99,59 @@ export default {
       align-items: flex-start;
       .episodes {
         text-align: left;
-        b {
-          vertical-align: top;
-        }
         ul {
-          margin-left: 10px;
           list-style-type: none;
           li {
             text-align: left;
+            display: inline-block;
+            margin: 5px 4px;
+            a {
+              text-decoration: none;
+              font-size: 18px;
+              font-weight: bold;
+              color: #fff;
+              background: black;
+              padding: 2px 6px;
+            }
           }
         }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .charCard {
+    header {
+      height: 70px;
+      h2 {
+        font-size: 30px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .charCard {
+    header {
+      height: 60px;
+      h2 {
+        font-size: 24px;
+      }
+    }
+    .content {
+      img {
+        width: 100px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 350px){
+  .charCard {
+    .content {
+      img {
+        width: 90px;
       }
     }
   }
