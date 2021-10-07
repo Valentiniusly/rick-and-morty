@@ -30,5 +30,13 @@ button {
       -1px 1px 3px #fff;
     color: #44c3d8;
   }
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+    &:hover {
+      text-shadow: none;
+      color: #fff;
+    }
+  }
 }
 </style>

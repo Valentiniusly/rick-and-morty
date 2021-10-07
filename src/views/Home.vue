@@ -1,9 +1,9 @@
 <template>
   <CharsFilter v-model="filter" />
   <CharsContainer :characters="characters || []" />
-  <h2 v-if="!characters.length">Try load more</h2>
+  <h2 v-if="noResults">Try load more</h2>
   <Loader v-if="loading" />
-  <Button @click="addCharacters" :disabled="loading">Load more</Button>
+  <Button @click="loadMoreCharacters" :disabled="loading">Load more</Button>
 </template>
 
 <script>
@@ -31,7 +31,7 @@ export default {
       store.commit('setLoading', false);
     });
 
-    const addCharacters = async () => {
+    const loadMoreCharacters = async () => {
       await store.dispatch('character/loadMoreCharacters');
     };
 
@@ -52,11 +52,14 @@ export default {
         })
     );
 
+    const noResults = computed(() => !characters.value.length);
+
     return {
       characters,
       loading,
-      addCharacters,
+      loadMoreCharacters,
       filter,
+      noResults,
     };
   },
 };
