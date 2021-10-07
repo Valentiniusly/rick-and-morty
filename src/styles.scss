@@ -8,19 +8,20 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background-image: url('./assets/img/space.png');
-  background-position: top;
-}
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-
-    &.active {
-      color: #42b983;
-    }
+  background: url('./assets/img/space.png') top #000;
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
   }
+}
+#app {
+  padding: 15px 0;
 }
 .container {
   width: 1140px;

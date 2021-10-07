@@ -1,4 +1,7 @@
 <template>
+  <router-link to="/" custom v-slot="{ navigate }">
+    <Button @click="navigate">Home</Button>
+  </router-link>
   <Loader v-if="loading" />
   <EpisodeCard :episode="episode" />
 </template>
@@ -9,9 +12,10 @@ import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 import EpisodeCard from '../components/EpisodeCard';
 import Loader from '../components/Loader';
+import Button from '../components/Button';
 
 export default {
-  components: { EpisodeCard, Loader },
+  components: { EpisodeCard, Loader, Button },
   setup() {
     const store = useStore();
     const route = useRoute();
