@@ -1,37 +1,39 @@
 <template>
-  <div class="charCard">
-    <header>
-      <h2
-        v-if="single"
-        style="cursor: default"
-      >
-        {{char.name}}
-      </h2>
-      <router-link
-        v-else
-        custom
-        :to="{name: 'Character', params: {name: joinName, id: char.id}}"
-        v-slot='{navigate}'
-      >
-        <h2 @click='navigate'>{{char.name}}</h2>
-      </router-link>
-    </header>
-    <div class="content">
-      <img :src="char.image" :alt="char.name" />
-      <div class="info">
-        <p class="species"><b>Species:</b>&nbsp;{{ char.species }}</p>
-        <p v-if="!single" class="episodes"><b>Episodes:</b>
-          <ul>
-            <li v-for='e in char.episode?.slice(0, 5)' :key='e'>
-              <router-link :to="{name: 'Episode', params: {id: episodeId(e)}}">{{episodeId(e)}}</router-link>
-            </li>
-          </ul>
-        <!--eslint-disable-next-line prettier/prettier-->
-        </p>
-        <p v-else><b>Location:</b>&nbsp;{{ char.location?.name }}</p>
+  <transition name="card" appear>
+    <div class="charCard">
+      <header>
+        <h2
+          v-if="single"
+          style="cursor: default"
+        >
+          {{char.name}}
+        </h2>
+        <router-link
+          v-else
+          custom
+          :to="{name: 'Character', params: {name: joinName, id: char.id}}"
+          v-slot='{navigate}'
+        >
+          <h2 @click='navigate'>{{char.name}}</h2>
+        </router-link>
+      </header>
+      <div class="content">
+        <img :src="char.image" :alt="char.name" />
+        <div class="info">
+          <p class="species"><b>Species:</b>&nbsp;{{ char.species }}</p>
+          <p v-if="!single" class="episodes"><b>Episodes:</b>
+            <ul>
+              <li v-for='e in char.episode?.slice(0, 5)' :key='e'>
+                <router-link :to="{name: 'Episode', params: {id: episodeId(e)}}">{{episodeId(e)}}</router-link>
+              </li>
+            </ul>
+          <!--eslint-disable-next-line prettier/prettier-->
+          </p>
+          <p v-else><b>Location:</b>&nbsp;{{ char.location?.name }}</p>
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -54,6 +56,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.card-enter-active, .card-leave-active {
+  transition: all .3s;
+}
+.card-enter-from, .card-leave-to {
+  opacity: 0;
+}
+
 .charCard {
   border-radius: 20px;
   background: #fff;
@@ -73,6 +82,10 @@ export default {
       cursor: pointer;
       text-shadow: 1px 0 3px #fff, -1px 0 3px #fff, 0 1px 3px #fff, 0 -1px 3px #fff,
         1px 1px 3px #fff, -1px -1px 3px #fff, 1px -1px 3px #fff, -1px 1px 3px #fff;
+      transition: all 0.2s;
+      &:hover {
+        transform: scale(0.95);
+      }
     }
   }
 
@@ -89,6 +102,7 @@ export default {
       margin-left: 10px;
       p {
         margin: 2px;
+        text-align: left;
       }
       b {
         font-size: 18px;
@@ -105,6 +119,10 @@ export default {
             text-align: left;
             display: inline-block;
             margin: 5px 4px;
+            transition: all 0.2s;
+            &:hover {
+              transform: scale(1.2);
+            }
             a {
               text-decoration: none;
               font-size: 18px;

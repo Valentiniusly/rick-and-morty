@@ -31,7 +31,7 @@ export default {
 
     watch([name, status], (values) => {
       const filter = {
-        name: values[0],
+        name: values[0].toLowerCase(),
         status: values[1],
       };
       emit('update:modelValue', filter);
@@ -59,15 +59,18 @@ export default {
   .inputs {
     display: flex;
     justify-content: center;
+    gap: 8px;
     input {
       font-size: 20px;
-      padding: 0.2em 0.4em;
+      padding: 6px 12px;
       border: none;
       outline: none;
       border-radius: 5px;
-      margin: 0 8px;
       width: 100%;
       max-width: 300px;
+      transition: all 0.1s;
+      background: #fff;
+      color: #000;
       &:focus {
         outline: 3px solid #4d9142;
       }
@@ -76,9 +79,11 @@ export default {
       cursor: pointer;
       font-size: 18px;
       border-radius: 5px;
+      padding-left: 5px;
       border: none;
       outline: none;
-      width: 80px;
+      background: #fff;
+      color: #000;
     }
   }
 }

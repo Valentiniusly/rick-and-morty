@@ -23,5 +23,12 @@ button {
   border: none;
   cursor: pointer;
   border-radius: 10px;
+  transition: all 0.2s;
+  &:hover {
+    text-shadow: 1px 0 3px #fff, -1px 0 3px #fff, 0 1px 3px #fff,
+      0 -1px 3px #fff, 1px 1px 3px #fff, -1px -1px 3px #fff, 1px -1px 3px #fff,
+      -1px 1px 3px #fff;
+    color: #44c3d8;
+  }
 }
 </style>
