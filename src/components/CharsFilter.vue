@@ -1,7 +1,7 @@
 <template>
   <div class="filter">
     <div class="inputs">
-      <input v-model="name" type="text" />
+      <input v-model="name" type="text" placeholder="Character" />
       <select v-model="status" :selected="status">
         <option value="" disabled>Status</option>
         <option value="alive">Alive</option>
@@ -68,11 +68,12 @@ export default {
       border-radius: 5px;
       width: 100%;
       max-width: 300px;
-      transition: all 0.1s;
       background: #fff;
       color: #000;
+      transition: all 0.1s;
+      -webkit-appearance: none;
       &:focus {
-        outline: 3px solid #4d9142;
+        box-shadow: 0 0 0 3px #4d9142;
       }
     }
     select {
